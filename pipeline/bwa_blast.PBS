@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#PBS -l walltime=3:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=12gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/blast
+
+
+module load blast+
+module load BWA
+
+
+#blastn
+blastn -num_threads 12 -query ../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa  -db Venustaconcha_ellipsiformis_mito.fasta -outfmt 6 -out Venustaconcha_ellipsiformis_mito.blastout
+
+
+
+
+#align all the reads against the reference transcriptome?
+#bwa index ../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa
+#bwa index Venustaconcha_ellipsiformis_mito.fasta
+
+#bwa mem -t 12 Venustaconcha_ellipsiformis_mito.fasta ../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa >Venustaconcha_ellipsiformis_mito.sam

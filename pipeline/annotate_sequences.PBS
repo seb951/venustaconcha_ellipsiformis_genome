@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=22gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/
+
+module load BEDTools
+module load EMBOSS
+module load blast+
+module load R
+
+###quast command (predict genes as well)
+
+./pipeline/annotate_sequences2.R
+

@@ -1,0 +1,24 @@
+----------------------------------------
+Begin PBS Prologue Tue Dec 19 15:15:10 EST 2017 1513714510
+Job ID:		6789173.egeon2
+Username:	renaut
+Group:		ujp-495-01
+Nodes:		node-c4-36
+End PBS Prologue Tue Dec 19 15:15:12 EST 2017 1513714512
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Tue Dec 19 16:07:13 EST 2017 1513717633
+Job ID:		6789173.egeon2
+Username:	renaut
+Group:		ujp-495-01
+Job Name:	bwa_blast.PBS
+Session:	3774
+Limits:		mem=12gb,neednodes=1:ppn=12,nodes=1:ppn=12,walltime=03:59:00
+Resources:	cput=00:54:37,energy_used=0,mem=1468900kb,vmem=1633852kb,walltime=00:52:00
+Queue:		courte
+Account:		ujp-495-aa
+Nodes:	node-c4-36
+Killing leftovers...
+
+End PBS Epilogue Tue Dec 19 16:07:13 EST 2017 1513717633
+----------------------------------------

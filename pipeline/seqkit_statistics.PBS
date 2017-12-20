@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#PBS -l walltime=1:59:00
+#PBS -l nodes=1:ppn=1
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+
+cd $SCRATCH/sophie_breton/genome
+
+
+#create file
+#touch abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+
+#run stats
+#seqkit stats sequences/pairends/err_corrected_bfc* >>abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+seqkit stats sequences/matepairs/HI.0766.001* >>abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+seqkit stats sequences/matepairs/err_* >>abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+#seqkit stats sequences/pacbio/Run130_472.C01_1.filtered_subreads.fasta >>abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+#seqkit stats sequences/rnaseq/Trinity.fasta >>abyss/results/dir_k41_B24G_H4_kc3/seqkit_statistics
+

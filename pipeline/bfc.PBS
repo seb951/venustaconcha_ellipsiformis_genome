@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd /RQexec/renaut/sophie_breton/genome/sequences/pairends
+
+module load R/3.0.0
+
+#first do trimmo.R, then bfc2.sh (which is loaded inside trimmo)...
+
+####I first do this for the pairends### make sure you and the script are sittin in the sequences/pairends directory
+
+for gzip_files in *_paired.fastq
+do
+	split -l100000000 $gzip_files
+	touch log_$gzip_files
+	for split in x*
+	####
+	do	
+	    /RQusagers/renaut/bfc-master/bfc -t6 -k37 $split >out_bfc_$split 2>>log_$gzip_files
+	done
+	####	
+	
+	cat out_bfc_x* >all_bfc
+	gzip -1 all_bfc
+	rm out_bfc_xa*
+	rm xa*
+	mv all_bfc.gz err_corrected_bfc_$gzip_files.gz
+done
+
+tail log* >error_correction_bfc.log
+rm log_*
+rm *H3412_9_R?_paired.fastq
+rm *H3412_9_R?_unpaired.fastq
+
+
+###I then do this for the matepairs
+cd ../matepairs
+
+
+for gzip_files in *_paired.fastq
+do
+  	split -l100000000 $gzip_files
+        touch log_$gzip_files
+        for split in x*
+        ####
+	do
+            /RQusagers/renaut/bfc-master/bfc -t6 -k37 $split >out_bfc_$split 2>>log_$gzip_files
+        done
+	####
+
+	cat out_bfc_x* >all_bfc
+        gzip -1 all_bfc
+        rm out_bfc_xa*
+        rm xa*
+	mv all_bfc.gz err_corrected_bfc_$gzip_files.gz
+done
+
+tail log* >error_correction_bfc.log
+rm log_*
+rm *H3412_9_R?_paired.fastq
+rm *H3412_9_R?_unpaired.fastq
+
+
+

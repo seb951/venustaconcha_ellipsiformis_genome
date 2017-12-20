@@ -1,0 +1,55 @@
+###notes
+#more hash functions (1,2,3) diminishes the bloom filter FPR
+#bigger bloom filters sizes (B=...) diminishes the bloom filter FPR
+#bigger datasize increases the FPR
+#smaller bloom filter size increases computing time (but again, this is non-linear...)
+#you must aim for an FPR of 5%
+#both hash function and bloom filter size and datasize  do not scale linearly (log like?), so you must test it for your own data...
+#Bloom size does not change the file size of the *1.fa file (this is the big file which causes malloc problems...)
+#stat_B3G_H3_20Mseq = FPR 2.1%
+#kc: minimum k-mer count threshold for Bloom filter assembly [2]
+use j=12 to use 12 threads on a single node for pe-assembly...
+#kmer size varries immensely computing time, and *1-fa file size (bigger kmer = smaller *-1.fa assembly
+#You can reduce the memory requirement by adding the quality trimming option (e.g. "q=15") to your abyss-pe command. That will trim the tails of the reads and remove a lot of the error k-mers: that does not seem to change much the *.fa file size...
+
+###8X6 million reads
+#91 hrs on 2 CPUs, but failed because of malloc going from *1.fa to *1.dot
+
+###k=59 with full datasets
+after 72hrs on 12 CPUs, had produced a *-1.fa file with 200M sequences. Died because ran out of time... Will certaintly also die running AdjList...
+also, Bloom filter FPR: 26% because the k was lowered to 59...
+
+
+###the memory problem can be addressed using "#PBS -l mem=23gb" to use the full mem. available on the node (here 24gb, up to 96gb...),
+even if the script is single threaded! 
+
+###abyss-map requires a lot of memory!!!
+
+###try this setting for sort that is pipped into abyss-map. This seems to be causing the memory problem
+S to limit size of temp files
+T to where the temp files must go..
+sort -S1G -T /RQexec/renaut/sophie_breton/genome/abyss/tmp/96Gram_k37_np24_B3G_H3_1Gseq/
+
+
+#For 33% of the data, it requires 48 gb of RAM, produces a file that is 25GB (this is a temp file in theory that is piped to fix-mate, sort, and dist-est).
+#In this case, it took 90minutes on 12 cores, 95gb of ram...
+
+###other options...
+B=3G kc=3 H=3 s=500 S=500-5000 v=-v 1>>log/stat_", name ," 2>>log/log_", name,sep = "")
+
+
+###kmergenie tells me that k should be ...37
+
+###April 7th 2017
+I have tried to incorporate new Illumina reads into the assembly: 
+/RQexec/renaut/sophie_breton/genome/sequences/pairedends/err_corrected_bfc_HI.3777.006.NS_Adaptor_2.Vell_11g_* and 
+/RQexec/renaut/sophie_breton/genome/sequences/pairedends/err_corrected_bfc_HI.3777.006.NS_Adaptor_6.Vell_11p_pool_R*
+
+and also the matepairs (as individual unpaired sequences in the first step of the assembly...)
+
+Incorporating these sequences, the results are worst... But apparently, these are not even the same individuals... Could even be a pool of individual! 
+
+Perhaps I should try only incorporating the matepairs...
+
+
+

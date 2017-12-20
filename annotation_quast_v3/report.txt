@@ -1,0 +1,33 @@
+All statistics are based on contigs of size >= 1000 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                        assembly_k41_B24G_H4_kc3-10  assembly_k41_B24G_H4_kc3-10_broken
+# contigs (>= 0 bp)             13635758                     821266                            
+# contigs (>= 1000 bp)          371706                       549364                            
+# contigs (>= 5000 bp)          94238                        50209                             
+# contigs (>= 10000 bp)         26952                        5151                              
+# contigs (>= 25000 bp)         5073                         23                                
+# contigs (>= 50000 bp)         1456                         0                                 
+Total length (>= 0 bp)          2638723663                   1554026338                        
+Total length (>= 1000 bp)       1590292198                   1425294273                        
+Total length (>= 5000 bp)       1000983904                   360423103                         
+Total length (>= 10000 bp)      541545133                    64766821                          
+Total length (>= 25000 bp)      231252884                    687249                            
+Total length (>= 50000 bp)      107178666                    0                                 
+# contigs                       371706                       821266                            
+Largest contig                  313274                       44597                             
+Total length                    1590292198                   1554026338                        
+Estimated reference length      1660000000                   1660000000                        
+GC (%)                          34.19                        34.19                             
+N50                             6656                         2812                              
+NG50                            6340                         2620                              
+N75                             3164                         1623                              
+NG75                            2758                         1423                              
+L50                             58552                        163666                            
+LG50                            63919                        183184                            
+L75                             142442                       346260                            
+LG75                            160146                       398562                            
+# N's per 100 kbp               2293.33                      13.17                             
+# predicted genes (unique)      201068                       277765                            
+# predicted genes (>= 300 bp)   74820                        82359                             
+# predicted genes (>= 1500 bp)  18539                        14338                             
+# predicted genes (>= 3000 bp)  6511                         3289                              

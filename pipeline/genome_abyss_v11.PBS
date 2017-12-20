@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#PBS -l walltime=47:59:00
+#PBS -l nodes=2:ppn=12
+#PBS -l mem=95gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/tmp/dir_k41_B24G_H4_kc3
+
+#module load MPI
+#module load BWA
+module load R/3.0.0
+
+#
+###
+./../../pipeline/genome_abyss_v11.sh
+
+
+###
+###parameters modified

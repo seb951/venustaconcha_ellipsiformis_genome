@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=22gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/
+
+
+###busco analysis...
+source /RQusagers/renaut/python3_env/bin/activate
+
+#eukaryota
+#python3 /RQusagers/renaut/busco/scripts/run_BUSCO.py -i /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa --cpu 12 -o results/dir_k41_B24G_H4_kc3/busco_genome_eukaryota -e 1e05 -m genome -l /RQusagers/renaut/busco/datasets/eukaryota_odb9
+
+
+#nematoda
+#python3 /RQusagers/renaut/busco/scripts/run_BUSCO.py -i /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa --cpu 12 -o results/dir_k41_B24G_H4_kc3/busco_genome_nematoda -e 1e05 -m genome -l /RQusagers/renaut/busco/datasets/nematoda_odb9
+
+
+#metazoa
+python3 /RQusagers/renaut/busco/scripts/run_BUSCO.py -i /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa --cpu 12 -o results/dir_k41_B24G_H4_kc3/busco_genome_metazoa -e 1e05 -m genome -l /RQusagers/renaut/busco/datasets/metazoa_odb9
+
+
+
+#eukaryota trinity
+#python3 /RQusagers/renaut/busco/scripts/run_BUSCO.py -i /RQexec/renaut/sophie_breton/genome/sequences/rnaseq/Trinity.fasta --cpu 12 -o busco_transcriptome_eukaryota -e 1e05 -m transcriptome -l /RQusagers/renaut/busco/datasets/eukaryota_odb9
+
+#metazoa trinity
+#python3 /RQusagers/renaut/busco/scripts/run_BUSCO.py -f -i /RQexec/renaut/sophie_breton/genome/sequences/rnaseq/Trinity.fasta --cpu 12 -o busco_transcriptome_metazoa -e 1e05 -m transcriptome -l /RQusagers/renaut/busco/datasets/metazoa_odb9
+
