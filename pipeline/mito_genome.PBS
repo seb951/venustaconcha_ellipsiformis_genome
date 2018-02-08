@@ -1,0 +1,83 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=12gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/mito_genome
+
+#load modules
+module load blast+
+module load BWA
+module load SAMtools
+module load bcftools
+
+#blastn assembled genome onto the mitochondrial reference. 
+#blastn -num_threads 12 -query ../assembly_k41_B24G_H4_kc3-10.fa  -db Venustaconcha_ellipsiformis_haplotype_female.fasta -outfmt 6 -evalue 1e-50 -out mito_contigs_highstringency.blastout
+
+#RESULTS: most the mito is there, split in about 12 contigs.
+
+
+#####
+#align all the reads against the reference mito, get the sequences, and realign.
+bwa index ../dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa
+bwa index Venustaconcha_ellipsiformis_haplotype_female.fasta
+
+#align reads unto the mito genome and pipe it to samtools view to only get mapped reads
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz ../../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped6.sam
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz ../../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped7.sam
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz ../../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped8.sam
+
+#cat files + header
+cat head.sam female_mapped6.sam female_mapped7.sam female_mapped8.sam >testassembly_mapped.sam
+
+#get header
+#head -2 Venustaconcha_ellipsiformis_mito.sam >head.sam
+
+#sam to bam
+samtools view -Sb testassembly_mapped.sam >testassembly_mapped.bam 2>log
+
+#sort by read name
+samtools sort -n testassembly_mapped.bam  -o testassembly_mapped_sorted.bam
+
+#bamtofastq (all mapped reads)
+/RQusagers/renaut/bedtools2/bin/bedtools bamtofastq -i testassembly_mapped_sorted.bam -fq mito.fq
+gzip -c mito.fq >mito.fq.gz
+
+#then assemble de novo reads unto the mito using "ABYSS" to check how many contigs are created depending on k value.
+#~/abyss/bin/ABYSS -k 15 mito.fq -o mito15.out
+#~/abyss/bin/ABYSS -k 17 mito.fq -o mito17.out
+#~/abyss/bin/ABYSS -k 19 mito.fq -o mito19.out
+#~/abyss/bin/ABYSS -k 21 mito.fq -o mito21.out
+#~/abyss/bin/ABYSS -k 23 mito.fq -o mito23.out
+#~/abyss/bin/ABYSS -k 15 mito.fq -o mito25.out
+#~/abyss/bin/ABYSS -k 31 mito.fq -o mito31.out
+#~/abyss/bin/ABYSS -k 35 mito.fq -o mito35.out
+#~/abyss/bin/ABYSS -k 37 mito.fq -o mito37.out
+#~/abyss/bin/ABYSS -k 39 mito.fq -o mito39.out
+#~/abyss/bin/ABYSS -k 41 mito.fq -o mito41.out
+#~/abyss/bin/ABYSS -k 45 mito.fq -o mito45.out
+
+#21 to 39 are good (one large contig at 16024bp)
+#below 21 it generates many contigs
+#above 39, no contigs.
+
+#align with bwa again...
+bwa mem Venustaconcha_ellipsiformis_haplotype_female.fasta mito.fq >mito.sam
+samtools view -Sb mito.sam >mito.bam
+samtools sort mito.bam >mito_sort.bam
+samtools index mito_sort.bam 
+#samtools tview mito_sort.bam Venustaconcha_ellipsiformis_haplotype_female.fasta
+
+#depth
+samtools depth mito_sort.bam >mito_sort.depth
+
+#mpileup SNPs, followed by bcftools
+samtools mpileup -uf Venustaconcha_ellipsiformis_haplotype_female.fasta mito_sort.bam | bcftools call -mv > mito.snp.vcf
+
+#generate consensus
+samtools mpileup -uf Venustaconcha_ellipsiformis_haplotype_female.fasta mito_sort.bam | bcftools call -c | vcfutils.pl vcf2fq > mito_alignment.fasta
+

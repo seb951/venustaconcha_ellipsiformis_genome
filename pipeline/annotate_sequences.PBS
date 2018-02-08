@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#PBS -l walltime=23:59:00
+#PBS -l walltime=11:59:00
 #PBS -l nodes=1:ppn=12
 #PBS -l mem=22gb
 #PBS -r n
@@ -16,5 +16,10 @@ module load R
 
 ###quast command (predict genes as well)
 
-./pipeline/annotate_sequences2.R
+#./pipeline/annotate_sequences_broken.R
+
+./pipeline/annotate_sequences_masked.R
+
+#cd /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3
+#/home/apps/Logiciels/blast+/2.2.28/bin/blastp -query assembly10_cds.orf -db /RQexec/renaut/blast_database/trembl/uniprot_trembl.fasta -evalue 1e-5 -num_threads 12 -max_target_seqs 1 -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore stitle' >assembly10_cds_trembl.orf.blast")
 

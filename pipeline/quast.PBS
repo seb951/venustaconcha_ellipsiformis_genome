@@ -1,8 +1,7 @@
 #!/bin/bash
 
-#PBS -l walltime=23:59:00
+#PBS -l walltime=99:59:00
 #PBS -l nodes=1:ppn=12
-#PBS -l mem=22gb
 #PBS -r n
 #PBS -j oe
 #PBS -A ujp-495-aa
@@ -18,9 +17,13 @@ source /RQusagers/renaut/python3_env/bin/activate
 ###quast command (predict genes as well)
 #/RQusagers/renaut/quast-4.4/quast.py --est-ref-size 1660000000 --eukaryote --glimmer --gene-thresholds 300,1500,3000 -m 1000 -t 12 assembly_k41_B24G_H4_kc3-10.fa  -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz --gene-finding -o annotation_quast_v1
 
-
 #/RQusagers/renaut/quast-4.4/quast.py --scaffolds --est-ref-size 1660000000 --eukaryote --glimmer --gene-thresholds 300,1500,3000 -m 1000 -t 12 assembly_k41_B24G_H4_kc3-10.fa  -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz --gene-finding -o annotation_quast_v3
 
 #/RQusagers/renaut/quast-4.4/quast.py --est-ref-size 1660000000 --eukaryote --glimmer --gene-thresholds 300,1500,3000 -m 1000 -t 12 assembly_k41_B24G_H4_kc3-10.fa  -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz  -o annotation_quast_v1
 
-/RQusagers/renaut/quast-4.4/quast.py --scaffolds --est-ref-size 1660000000 --eukaryote -t 12 assembly_k41_B24G_H4_kc3-10.fa  -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz  -o annotation_quast_v1
+#/RQusagers/renaut/quast-4.4/quast.py --scaffolds --est-ref-size 1660000000 --eukaryote -t 12 assembly_k41_B24G_H4_kc3-10.fa  -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz  -o annotation_quast_v1
+
+###quast command on masked genome
+/RQusagers/renaut/quast-4.4/quast.py --est-ref-size 1660000000 --eukaryote --glimmer -t 12 repmask-1000_06/vel_assembly-1000b.fasta.masked -1 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz -2 ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz  -o annotation_quast_vMasked
+
+

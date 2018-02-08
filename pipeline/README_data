@@ -1,0 +1,65 @@
+
+#final assembled genome (all long scaffolds)
+assembly_k41_B24G_H4_kc3-10.fa
+
+#final masked genome (all long scaffolds > 1000bp)
+vel_assembly-1000b.fasta.masked
+
+#53 unique contigs blasting to the mt genome
+mito_contigs_highstringency.blastout
+
+#subset of mitochondrial sequences that mapped to the mt female Venustaconcha reference of Breton et al. 2009.
+mito.fq.gz
+
+#mito_female_venustaconcha fasta file (mt reference from Breton et al.2009, denovo mt genome, mt genome consensus from realignment)
+mito_female_venustaconcha.fasta
+
+#All scripts (pipeline) used in the analyses are also provided here: https://github.com/seb951/venustaconcha_ellipsiformis_genome
+#annotate_sequences_broken.R
+#annotate_sequences_masked.R
+#annotate_sequences.PBS
+#annotate_sequences.R
+annotate the genome (three different versions, based on the final scaffold assembly, the final scaffold assembly broken down based on N, 
+and the repetitive element masked genome assembly 
+
+#bfc_mp.PBS
+bfc error correction for mate-pairs
+
+#bfc.PBS
+bfc error correction for paired ends
+
+#busco.PBS
+BUSCO analysis
+
+#genome_abyss_v11.PBS and genome_abyss_v11.sh
+This is the main genome assembly step
+
+#graveyard/
+old script not usefull anymore
+
+#mito_genome.PBS
+mitochondrial genome analyses
+
+#quast.PBS
+quast statitics
+
+#saving_data
+saving the results into a tarball
+
+#seqkit_statistics.PBS
+genome assembly stats
+
+#trimmo.PBS and trimmo.R
+trimming data using trimmomatic
+
+
+
+#QUAST annotation folder. This contains the report.html for a web browser friendly view of the genome statistics. The "predicted_genes" contain
+the gff files along with the blast annotations ("assembly_k41_B24G_H4_kc3-10_glimmer_genes_annotated_uniprot.gff",
+"assembly_k41_B24G_H4_kc3-10_broken_glimmer_genes_annotated_uniprot.gff" and "/vel_assembly-1000b-fasta-masked_glimmer_genes_annotated_uniprot.gff")
+
+
+
+
+
+

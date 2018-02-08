@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#PBS -l walltime=07:59:00
+#PBS -l nodes=1:ppn=1
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/
+mkdir /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files
+
+#final assembled genome (all long scaffolds)
+cp /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#final masked genome (all long scaffolds > 1000bp)
+cp /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/repmask-1000_06/vel_assembly-1000b.fasta.masked /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#53 unique contigs blasting to the mt genome
+cp /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/mito_genome/mito_contigs_highstringency.blastout /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#subset of mitochondrial sequences that mapped to the mt female Venustaconcha reference of Breton et al. 2009.
+cp /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/mito_genome/mito.fq.gz  /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#mito_female_venustaconcha fasta file (mt reference from Breton et al.2009, denovo mt genome,mt genome consensus from realignment)
+cp /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/mito_genome/mito_female_venustaconcha.fasta  /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#All scripts used in the analysis are provided here: https://github.com/seb951/venustaconcha_ellipsiformis_genome
+cp -r /RQexec/renaut/sophie_breton/genome/abyss/pipeline  /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#QUAST annotation folder. This contains the report.html for a web browser friendly view of the genome statistics The "predicted_genes/assembly_k41_B$
+cp -r /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/annotation_quast_v3  /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#Quasta annotation masked genome 
+cp -r /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/annotation_quast_vMasked /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files/.
+
+#tarball it, so it is ready for transfer
+tar -cvzf /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files.tar.gz /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files
+
+
+#rm the dir to free space...
+rm -r /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/genome_transfer_files
+
+
+
+
+
+
