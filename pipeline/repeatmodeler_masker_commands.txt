@@ -1,0 +1,58 @@
+### RepeatModeler
+
+# Remove sequences less than 1000b from the assembly using the perl script removesmalls.pl
+# removesmalls.pl version by Vivek Krishnakumar downloaded from https://www.biostars.org/p/79202/
+# Name the reduce assembly “vel_assembly-1000b.fasta”
+
+$ perl removesmalls.pl 1000 original_assembly.fa > vel_assembly-1000b.fasta
+
+# Build a database from the reduced assembly with RepeatMasker tool BuildDatabase
+# The database will be named “vel-1000b_RMdb”
+
+$ perl RepeatModeler-open-1.0.10/BuildDatabase -name vel-1000b_RMdb -engine ncbi vel_assembly-1000b.fasta
+
+# Run RepeatModeler on the reduced assembly vel_assembly-1000b.fasta
+# The output file “consensi.fa.classified” is what we will need after this run for the RepeatMasker steps
+
+$ perl path_to/RepeatModeler-open-1.0.10/RepeatModeler -engine ncbi -pa 1 -database vel-1000b_RMdb
+
+### RepeatMasker
+
+# Run RepeatMasker on the reduced assembly using sequences in database for bivalves and mollusks (search option: -species)
+# The .tbl output files contain a raw summary of the masked repetitive sequences
+# The .masked output files are the masked versions of the input assembly
+
+$ perl path_to/RepeatMasker/RepeatMasker -species mollusca -nolow -gccalc -excln -a -pa 1 vel_assembly-1000b.fasta
+$ perl path_to/RepeatMasker/RepeatMasker -species bivalvia -nolow -gccalc -excln -a -pa 1 vel_assembly-1000b.fasta
+
+# Extract sequences from the taxa “mollusca” and “bivalvia” from the database with the tool queryRepeatDatabase.pl
+# The tool creates a directory for the output files whose name is the specified taxon name, annotated sequences are in the output file “specieslib”
+
+$ perl path_to/RepeatMasker/util/queryRepeatDatabase.pl -species bivalvia -stat
+$ perl path_to/RepeatMasker/util/queryRepeatDatabase.pl -species mollusca -stat
+
+# Rename the file “consensi.fa.classified” obtained with RepeatModeler into “vclass.fa”
+# Merge sequences in vclass.fa with those in the specieslib files to create two combined libraries named “vclass_bivalvia.fa” and “vclass_mollusca.fa”
+# Run RepeatMasker on the reduced assembly using sequences in files vclass.fa, vclass_bivalvia.fa, vclass_mollusca.fa (search option: -lib)
+# The .tbl output files contain a raw summary of the masked repetitive sequences
+# The .masked output files are the masked versions of the input assembly
+
+$ perl path_to/RepeatMasker/RepeatMasker -lib vclass_bivalvia.fa -nolow -gccalc -excln -a -pa 1 vel_assembly-1000b.fasta
+$ perl path_to/RepeatMasker/RepeatMasker -lib vclass_mollusca.fa -nolow -gccalc -excln -a -pa 1 vel_assembly-1000b.fasta
+$ perl path_to/RepeatMasker/RepeatMasker -lib vclass.fa -nolow -gccalc -excln -a -pa 1 vel_assembly-1000b.fasta
+
+### buildSummary.pl
+
+# Given the higher masking performance of the -lib runs, create a more detailed table of the annotation with the RepeatMasker tool buildSummary.pl
+
+# First create a .tsv file containing two columns: the first is the names of the sequences in the reduced assembly vel_assembly-1000b.fasta, the second is their length
+# This .tsv file is needed by buildSummary.pl and can be created easily with the tool “Compute sequence length” on the Galaxy platform at https://usegalaxy.org
+# Name the file “vel_assembly-1000b.fasta.out.tsv”
+
+# Run buildSummary.pl using the .tsv file and the output file .out from the -lib RepeatMasker runs, repeat this operation for each of the three runs
+# The output file we name as “detailed_file.txt” contains, among the rest, a more detailed annotation of the repeats compared to the original .tbl files
+# The total masking percentages shown in detailed_file.txt can be slightly different form the original .tbl files because they are calculated in a different way
+# Warning: since buildSummary.pl might alter the original RepeatMasker output files it is best to copy all of them in a different folder before running buildSummary.pl
+# (not sure if and how this actually happens, but it is better to do this as a safety measure)
+
+$ perl path_to/RepeatMasker/util/buildSummary.pl -species venustaconcha_ellipsiformis -genome vel_assembly-1000b.fasta.out.tsv -useAbsoluteGenomeSize vel_assembly-1000b.fasta.out > detailed_file.txt
