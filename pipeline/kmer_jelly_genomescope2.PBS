@@ -1,0 +1,184 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=92gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+
+module load R
+
+
+cd $SCRATCH/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3
+
+
+###
+#jellyfish count 15
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 15 --bf-size 8G -s 24G -o jellyfish2/mer15_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/15mer_out.histo jellyfish2/mer15_out
+
+#rm jellyfish data
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish2/15mer_out.histo 15 100 jellyfish2/15 1000
+
+
+###
+#jellyfish count 17
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 17 --bf-size 8G -s 24G -o jellyfish2/mer17_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/17mer_out.histo jellyfish2/mer17_out
+
+#rm jellyfish data
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish2/17mer_out.histo 17 100 jellyfish2/17 1000
+
+
+###
+#jellyfish count 19
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 19 --bf-size 8G -s 24G -o jellyfish2/mer19_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/19mer_out.histo jellyfish2/mer19_out
+
+#rm jellyfish data
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish2/19mer_out.histo 19 100 jellyfish2/19 1000
+
+###
+#jellyfish count 21
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 21 --bf-size 4G -s 8G -o jellyfish2/mer21_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/21mer_out.histo jellyfish2/mer21_out
+
+#rm jellyfish data
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish2/21mer_out.histo 21 100 jellyfish2/21 1000
+
+###
+#jellyfish count 31
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 31 --bf-size 4G -s 8G -o jellyfish2/mer31_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/31mer_out.histo jellyfish2/mer31_out
+
+#rm jellyfish data
+
+###
+#jellyfish count 41
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 41 --bf-size 4G -s 8G -o jellyfish2/mer41_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish2/41mer_out.histo jellyfish2/mer41_out
+
+#rm jellyfish data
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish2/41mer_out.histo 41 100 jellyfish2/41 1000
+
+###
+#jellyfish count 17nobloom
+#/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+#-t 12 -C -m 17 -s 24G -o jellyfish/mer_out --min-qual-char=? \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz) \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz) \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz) \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz) \
+#<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish/17mer_out.histo.nobloom jellyfish/mer_out
+
+#rm jellyfish data
+rm jellyfish/mer_out
+
+
+###
+#jellyfish count 17raw
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 17 --bf-size 8G -s 24G -o jellyfish/mer_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/HI.0502.008.Index_10.H3412_9_R1.fastq.gz) \
+<(zcat ../../../sequences/pairends/HI.0502.008.Index_10.H3412_9_R2.fastq.gz) 
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish/17mer_out.histo.smallraw jellyfish/mer_out
+
+#rm jellyfish data
+rm jellyfish/mer_out
+
+###
+#jellyfish count 17small
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish count \
+-t 12 -C -m 17 --bf-size 8G -s 24G -o jellyfish/mer_out --min-qual-char=? \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz) \
+<(zcat ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz)
+
+#histo
+/home/apps/Logiciels/trinityrnaseq/2015-03-06/trinity-plugins/jellyfish-2.1.4/bin/jellyfish histo -o jellyfish/17mer_out.histo.small jellyfish/mer_out
+
+#rm jellyfish data
+rm jellyfish/mer_out
+
+
+###genomescope
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish/17mer_out.histo.nobloom 17 100 jellyfish/17nobloom 1000
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish/17mer_out.histo.smallraw 17 100 jellyfish/17small_raw 1000
+/RQexec/renaut/sophie_breton/genome/abyss/pipeline/genomescope.R jellyfish/17mer_out.histo.small 17 100 jellyfish/17small 1000
+
+###results
+#17 and 17nobloom converge. Very little difference. No points in not having the bloom filter...
+#19,21,31,41 all converge on same values
+#17raw sequence and 17 small do not converge...
+#15 does not converge...

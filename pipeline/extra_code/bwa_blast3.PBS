@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=12gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+cd $SCRATCH/sophie_breton/genome/abyss/blast
+
+
+module load blast+
+module load BWA
+module load SAMtools
+
+#blastn the 
+#Venustaconcha_ellipsiformis_mito.blastout
+
+#blastn the transcriptome ?
+#blastn -num_threads 12 -query /RQexec/renaut/sophie_breton/genome/sequences/rnaseq/Trinity.fasta -db Venustaconcha_ellipsiformis_mito.fasta -outfmt 6 -out Venustaconcha_ellipsiformis_transcripto_vs_mito.blastout
+#RESULTS: most the mito is there, split in about 12 contigs.
+
+
+#####OPTION 1
+#align all the reads against the reference transcriptome?
+#bwa index ../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-10.fa
+#bwa index Venustaconcha_ellipsiformis_mito.fasta
+
+#align reads unto the mito genome and pipe it to samtools view to only get mapped reads
+bwa mem -t 12 Venustaconcha_ellipsiformis_mito.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz >mito.sam
+

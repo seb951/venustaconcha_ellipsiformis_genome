@@ -28,13 +28,13 @@ module load SAMtools
 #bwa index Venustaconcha_ellipsiformis_mito.fasta
 
 #align reads unto the mito genome and pipe it to samtools view to only get mapped reads
-bwa mem -t 12 Venustaconcha_ellipsiformis_mito.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >mapped6.sam
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped6.sam
 
-bwa mem -t 12 Venustaconcha_ellipsiformis_mito.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >mapped7.sam
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped7.sam
 
-bwa mem -t 12 Venustaconcha_ellipsiformis_mito.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >mapped8.sam
+bwa mem -t 12 Venustaconcha_ellipsiformis_haplotype_female.fasta ../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz ../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz | samtools view -F4 >female_mapped8.sam
 
-cat mapped6.sam mapped7.sam mapped8.sam >testassembly_mapped.sam
+cat female_mapped6.sam female_mapped7.sam female_mapped8.sam >testassembly_mapped.sam
 
 #get mapped reads
 #samtools view -F4 Venustaconcha_ellipsiformis_mito.sam  >testassembly_mapped.sam
@@ -58,10 +58,11 @@ samtools sort -n testassembly_mapped2.bam  -o testassembly_mapped2_sorted.bam
 #then align reads unto the mito using bwa, or make a denovo assembly using "ABYSS"
 ~/abyss/bin/ABYSS -k 42 mito.fq -o mito.out
 
-bwa mem Venustaconcha_ellipsiformis_mito.fasta mito.fq >mito.sam
+bwa mem Venustaconcha_ellipsiformis_haplotype_female.fasta mito.fq >mito.sam
+samtools view -Sb mito.sam >mito.bam
 samtools sort mito.bam >mito_sort.bam
 samtools index mito_sort.bam 
-samtools tview mito_sort.bam Venustaconcha_ellipsiformis_mito.fasta
+samtools tview mito_sort.bam Venustaconcha_ellipsiformis_haplotype_female.fasta
 
 
 #RESULTS: there are about 5000 reads in mito.fq, they represent several (4-5) section of the mito genome, but most of the mito genome is absent

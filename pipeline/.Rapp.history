@@ -1,0 +1,519 @@
+sums(table.summary[,2])
+sum(table.summary[,2])
+tail(table.summary,150)
+tail(table.summary[,2])
+rle(table.summary[,2])
+rle(sor(table.summary[,2]))
+rle(sort(table.summary[,2]))
+hist(sort(table.summary[,2]))
+hist(log(table.summary[,2]))
+counts=table.summary[,-1]
+rownames(counts)=table.summary[,1]
+grp=factor(rep(c("Control","Treated"),times=c(4,3)))
+summarized=DGEList(counts,lib.size=colSums(counts),group=grp)
+disp=estimateCommonDisp(summarized)
+disp$common.dispersion
+tested=exactTest(disp)
+topTags(tested)
+genes=as.integer(p.adjust(tested$table$PValue[tested$table$logFC!=0],method="BH")<.05)
+names(genes)=row.names(tested$table[tested$table$logFC!=0,])
+head(genes)
+head(supportedOrganisms())
+pwf=nullp(genes,"hg19","ensGene")
+pwf
+head(pwf)
+head(supportedOrganisms())
+(supportedOrganisms())
+supportedOrganisms()[supportedOrganisms()$Genome=="hg19",]
+GO.wall=goseq(pwf,"hg19","ensGene")
+pwf=nullp(genes,"hg19","ensGene")
+head(pwf)
+GO.wall=goseq(pwf,"hg19","ensGene")
+GO.samp=goseq(pwf,"hg19","ensGene",method="Sampling",repcnt=1000)
+biocLite("org.Hs.eg.db")
+GO.wall=goseq(pwf,"hg19","ensGene")
+GO.wall
+head(head(GO.wall))
+head(head(GO.wall),50)
+head(GO.wall,50)
+GO.samp=goseq(pwf,"hg19","ensGene",method="Sampling",repcnt=1000)
+enriched.GO=GO.wall$category[p.adjust(GO.wall$over_represented_pvalue,method="BH")<.05]
+dim(enriched.GO)
+dim(GO.wall)
+head(GO.wall)
+length(enriched.GO)
+supportedOrganisms()
+bioClite("qvalue")
+biocLite("qvalue")
+library(qvalue)
+head(pwf)
+plow.new()
+dev.new()
+plot(hist(sample(1:1000)))
+dev.new()
+plot(hist(sample(1:100)))
+library("rstasnt")
+library("rstan")
+?rstan
+###indicateurs de performance#
+library(rAltmetric)
+altmetric_data()
+?altmetric_data
+altmetric_data(altmetrics(doi='10.1038/489201a'))
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99 '))
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))
+altmetrics(doi='10.1038/nplants.2017.99'))
+altmetrics(doi='10.1038/nplants.2017.99')
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99')
+)
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))[,31]
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))[,33]
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))[,37]
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))[,44]
+altmetric_data(altmetrics(doi='10.1038/nplants.2017.99'))
+plot(c(1:25),c(1:25),symbols = c(1:25))
+?plot
+plot(c(1:10),c(1:10))
+plot(c(1:10),c(1:10),pch = 21)
+plot(c(1:10),c(1:10),pch = 21:25)
+plot(c(1:10),c(1:10),pch = 21:25,col = "red")
+plot(c(1:10),c(1:10),pch = 1:25,col = "red")
+plot(c(1:10),c(1:10),pch = 1:25,col = "red",fill = "red")
+plot(c(1:10),c(1:10),pch = 1:10,col = "red")
+plot(c(1:10),c(1:10),pch = 1:10,col = "red", lwd = 5)
+points(c(10:1),c(1:10))
+points(c(4),c(4),lwd = 2, col = "green")
+?plot
+sample(1:10,10)
+seed = 1000#
+data = cbind(sample(1:100,100),sample(1:100,100))
+head(data)
+seed = 1000#
+data = cbind(sample(1:100,100),sample(1:100,100))
+head(data)
+plot(data)
+plot(data,pch = 1:25)
+plot(data,pch = 21:25)
+plot(data,pch = 1:5)
+plot(data,pch = 1:1-)
+plot(data,pch = 1:10)
+plot(data,pch = 11:20)
+plot(data,pch = 11:12)
+plot(data,pch = 11:13)
+plot(data,pch = 14:20)
+plot(data,pch = 14:15)
+plot(data,pch = 14:14)
+plot(data,pch = 16:16)
+plot(data,pch =16, col = "darkred")
+plot(data,pch =16, col = "darkred",lwd = 4)
+plot(data,pch =16, col = "darkred",lwd = 6)
+plot(data,pch =16, col = "darkred",pch = 6)
+plot(data,pch =16, col = "darkred",lwd = 4)
+plot(data,pch =16, col = "darkred",lwd = 41
+)
+?par
+?points
+plot(data,pch =16, col = "darkred",cex = 2)
+plot(data,pch =16, col = "plot(data,pch =16, col = c("red","blue","gold3"),cex = 2)darkred",cex = 2)
+plot(data,pch =16, col = c("red","blue","gold3"),cex = 2)
+points(data, pch = 1:25,col = "black", cex = 0.5)
+points(data, pch = 1:25,col = "black", cex = 0.5)#
+data[,3] = c("africa","asia","america")
+data = as.dataframe(sample(1:100,100),sample(1:100,100))
+data = as.data.frame(sample(1:100,100),sample(1:100,100))
+data = data.frame(sample(1:100,100),sample(1:100,100))
+data
+#points(data, pch = 1:25,col = "black", cex = 0.5)#
+data[,3] = c("africa","asia","america")
+data = data.frame(sample(1:100,100),sample(1:100,100))#
+#
+#add info for species#
+data[,3] = c(rep("africa",30),rep("asia",40),rep("america",30))
+data
+str(dta)
+str(data)
+data[,4] = sample(1:10,100)
+#add info for species#
+data[,4] = sample(1:10,100,replace = T)
+data
+data = data.frame(sample(1:100,100),sample(1:100,100))#
+#
+#add info for continents#
+data[,3] = c(rep("africa",30),rep("asia",40),rep("america",30))#
+#
+#add info for species#
+data[,4] = sample(1:10,100,replace = T)#
+#
+#colors#
+colors = rep("green",100)#
+colors[data[,3] == "africa"] = "red"#
+colors[data[,3] == "america"] = "blue"#
+#
+#plot data (raw)#
+plot(data)#
+#plot data with option#
+plot(data,pch =16, col = colors,cex = 2)
+#sample data#
+data = data.frame(sample(1:100,100),sample(1:100,100))#
+#
+#add info for continents#
+data[,3] = c(rep("africa",30),rep("asia",40),rep("america",30))#
+#
+#add info for species#
+data[,4] = sample(1:10,100,replace = T)#
+#
+#colors#
+colors = rep("green",100)#
+colors[data[,3] == "africa"] = "red"#
+colors[data[,3] == "america"] = "blue"#
+#
+#plot data (raw)#
+plot(data[,1:2])#
+#plot data with option#
+plot(data[,1:2],pch =16, col = colors,cex = 2)
+as.factor(data[,3])
+plot(data[,1:2],pch =as.factor(data[,3], col = colors,cex = 2)
+)
+plot(data[,1:2],pch =as.factor(data[,3]), col = colors,cex = 2)
+#sample data#
+data = data.frame(sample(1:100,100),sample(1:100,100))#
+#
+#add info for continents#
+data[,3] = c(rep("africa",30),rep("asia",40),rep("america",30))#
+#
+#add info for species#
+data[,4] = sample(1:10,100,replace = T)#
+#
+#colors#
+colors = rep("green",100)#
+colors[data[,3] == "africa"] = "red"#
+colors[data[,3] == "america"] = "blue"#
+#
+#symbols#
+#
+#plot data (raw)#
+plot(data[,1:2])#
+#
+#plot data with option#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylab name", xlab = xlabname")
+))
+""""
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylab name", xlab = "xlabname")
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+points(data, pch = data[,4] ,col = "black", cex = 0.5)
+points(data, pch = data[,4] ,col = "black", cex = 0.9)
+?legend
+#add legend#
+legend(150,80,y,legend = c("africa","asia","america"), fill = colors)
+#add legend#
+legend(800,80,y,legend = c("africa","asia","america"), fill = colors)
+#add legend#
+legend(80,80,y,legend = c("africa","asia","america"), fill = colors)
+#add legend#
+legend(80,80,y,legend = c("africa","asia","america"), fill = c("#
+#plot data with option#
+par(mfrow(5,14,4,2)#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(150,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"))#
+"))
+#plot data with option#
+par(mfrow(5,14,4,2)#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(150,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"))
+par(mfrow(5,14,4,2))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+?par
+#plot data with option#
+par(mar(5,14,4,2))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+#plot data with option#
+par(mar = c(5,14,4,2))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+#plot data with option#
+par(mar = c(5,4,14,2))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+#plot data with option#
+par(mar = c(15,4,14,2))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")
+par(mar = c(5,4,4,12))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(150,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"))
+legend(100,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"))
+legend(100,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)
+legend(110,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)
+#plot data (raw)#
+plot(data[,1:2])#
+#
+#plot data with option#
+par(mar = c(5,4,4,12))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)
+#plot data with option#
+par(mar = c(10,4,4,12))#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)
+#plot data (raw)#
+plot(data[,1:2])#
+#
+#plot data with options#
+par(mar = c(8,4,4,12)) #plot margins#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,y,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)
+legend(110,60,y,legend = c(1:10), pch = c(1:10),xpd = T)
+legend(110,60,legend = c(1:10), pch = c(1:10),xpd = T)
+par(mar = c(8,4,4,12)) #plot margins#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)#
+#
+legend(110,60,legend = c(1:10), pch = c(1:10),xpd = T)
+legend(110,60,legend = paste("species",c(1:10)), pch = c(1:10),xpd = T)
+#plot data (raw)#
+plot(data[,1:2])#
+#
+#plot data with options#
+par(mar = c(8,4,4,12)) #plot margins#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)#
+#
+legend(110,60,legend = paste("species",c(1:10)), pch = c(1:10),xpd = T)
+#plot data with options#
+par(mar = c(8,4,4,12)) #plot margins#
+plot(data[,1:2],pch =16, col = colors,cex = 2, ylab = "ylabname", xlab = "xlabname",main = "fun PCA example")#
+#
+#add small points on top#
+points(data, pch = data[,4] ,col = "black", cex = 0.9)#
+#
+#add legend#
+legend(110,80,legend = c("africa","asia","america"), fill = c("green","red","blue"),xpd = T)#
+#
+legend(110,60,legend = paste("species",c(1:10)), pch = c(1:10),xpd = T)
+log(0.001)
+x = c(1:10)
+y = sample(1:2,10,replace = T)
+z = sample(9:11,10,replace = T)
+?t.test
+t.test(extra ~ group, data = sleep)
+head(sleep)
+(sleep)
+xyz = cbind(x,y,z)
+xyz
+t.test(x,yxz)
+t.test(x,xyz)
+t.test(y,xyz)
+#set working directory#
+setwd("~/PD")#
+#
+#list & load all R1's#
+system("ls *R1.fastq >list_R1")#
+r1 = read.table("list_R1", stringsAsFactors = F)#
+#
+#list & load all R2's#
+system("ls *R2.fastq >list_R2")#
+r2 = read.table("list_R2", stringsAsFactors = F)
+r1
+r2
+r1_modif_name = r1
+gsub("-","_",r1_modif_name)
+gsub("-","_",r1_modif_name[,1])
+r1 = read.table("list_R1", stringsAsFactors = F)#
+r1_modif_name = r1#
+r1_modif_name[,1] = gsub("-","_",r1_modif_name[,1])
+r1_modif_name
+r1[,1]
+r1[1,1]
+r1_modif_name[1,1]
+i = 1
+command_mv = paste("mv",r1[i,1],r1_modif_name[i,1])
+command_mv
+#modify all names for an "underscore" using mv command#
+for(i in 1:nrow(r1))#
+{#
+command_mv = paste("mv",r1[i,1],r1_modif_name[i,1])#
+command_mv_r2 = paste("mv",r2[i,1],r2_modif_name[i,1])#
+#
+system(command_mv)#
+system(command_mv_r2)#
+}
+r2_modif_name
+r2_modif_name = r2#
+r2_modif_name[,1] = gsub("-","_",r2_modif_name[,1])
+r2_modif_name
+#modify all names for an "underscore" using mv command#
+for(i in 1:nrow(r1))#
+{#
+command_mv = paste("mv",r1[i,1],r1_modif_name[i,1])#
+command_mv_r2 = paste("mv",r2[i,1],r2_modif_name[i,1])#
+#
+system(command_mv)#
+system(command_mv_r2)#
+}
+strsplit(r1_modif_name[,1],"."fixed = F)
+strsplit(r1_modif_name[,1],".",fixed = F)
+?strsplit
+strsplit(r1_modif_name[,1],".",fixed = T)
+unlist(strsplit(r1_modif_name[,1],".",fixed = T))
+temp_list = unlist(strsplit(r1_modif_name[,1],".",fixed = T))
+temp_list
+temp_list[seq(1,length(temp_list),by = 3)]
+seq(1,length(temp_list),by = 3)
+seq(2,length(temp_list),by = 3)
+temp_list[seq(2,length(temp_list),by = 3)]
+temp_list[c(2,5,8,11)]
+temp_list2 = temp_list[seq(2,length(temp_list),by = 3)]
+unique(temp_list2)
+r1_modif_name
+regexpr(unique_names[1], r1_modif_name[,1])
+unique_names = unique(temp_list2)
+regexpr(unique_names[1], r1_modif_name[,1])
+unique_names[1]
+r1_modif_name[,1]
+r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1]
+unique_names[1]
+paste("cat ", r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1], " >",unique_names[1],"_combined.fastq",sep = "")
+r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1]
+temp_seq = paste(r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1])
+temp_seq
+temp_seq = paste(r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1],collapse = T)
+temp_seq = paste(r1_modif_name[regexpr(unique_names[1], r1_modif_name[,1])>0,1],collapse = " ")
+temp_seq
+command = paste("cat ",temp_seq, " >",unique_names[1],"_combined.fastq",sep = "")
+command
+#combine the samples that have the same name#
+for(i in 1:length(unique_names))#
+{#
+temp_seq = paste(r1_modif_name[regexpr(unique_names[i], r1_modif_name[,1])>0,1],collapse = " ") #
+#
+#cat command#
+cat_command = paste("cat ",temp_seq, " >",unique_names[i],"_combined.fastq",sep = "")#
+#
+print(cat_command)#
+#
+system(cat_command)#
+#
+}
+temp_seq
+temp_seq = "FLD0021.BAC_OSC_1560_06_R1.fastq"
+temp_seq
+cat_command = paste("cat ",temp_seq, " >",unique_names[i],"_combined.fastq",sep = "")
+cat_command
+system(cat_command)
+#find the unique sample names#
+temp_list_r2 = unlist(strsplit(r2_modif_name[,1],".",fixed = T))#
+temp_list2_r2 = temp_list_r2[seq(2,length(temp_list_r2),by = 3)]#
+unique_names_r2 = unique(temp_list2_r2)
+unique_names_r2
+i = 1
+temp_seq_r2 = paste(r2_modif_name[regexpr(unique_names_r2[i], r2_modif_name[,1])>0,1],collapse = " ")
+temp_seq_r2
+#combine the samples that have the same name#
+for(i in 1:length(unique_names))#
+{#
+temp_seq = paste(r1_modif_name[regexpr(unique_names[i], r1_modif_name[,1])>0,1],collapse = " ") #
+temp_seq_r2 = paste(r2_modif_name[regexpr(unique_names_r2[i], r2_modif_name[,1])>0,1],collapse = " ") #
+#cat command#
+cat_command = paste("cat ",temp_seq, " >",unique_names[i],"_combined.fastq",sep = "")#
+cat_command_r2 = paste("cat ",temp_seq_r2, " >",unique_names_r2[i],"_combined.fastq",sep = "")#
+#
+print(cat_command)#
+print(cat_command_r2)#
+#
+system(cat_command)#
+system(cat_command_r2)#
+}
+mito_depth = read.table("../../results/mito_sort.depth")#
+dev.new(width=15, height=3)#
+plot(1:15975,log(mito_depth[,3],10),type = "l", ylim = c(2,4), ylab = "coverage",yaxt = "n", xlab = "position (bp)")#
+axis(2,at = c(2,3,4),labels = c(100,1000,10000), cex.axis = 0.7)#
+#
+#add snps#
+snp = c(3637,4120,6239,7103,12874,12876)#
+snp_nucl = c("3637:T/C","4120:C/T","6239:C/T","7103:T/C","12874:A/C","12876:C/A")#
+points(c(3637,4120,6239,7103,12844,12906),rep(4,5),col = c("orange","blue","green","black","purple","red"),pch = 19)#
+#
+legend(13000,y = 3.6, legend = snp_nucl, fill = c("blue","green","black","purple","red"),cex = 0.7)
+setwd("/Users/jerry/Documents/MANUSCRIPTS/2018/39.Venustachonca_genome_paper/dir_k41_B24G_H4_kc3/pipeline")#
+mito_depth = read.table("../../results/mito_sort.depth")#
+dev.new(width=15, height=3)#
+plot(1:15975,log(mito_depth[,3],10),type = "l", ylim = c(2,4), ylab = "coverage",yaxt = "n", xlab = "position (bp)")#
+axis(2,at = c(2,3,4),labels = c(100,1000,10000), cex.axis = 0.7)#
+#
+#add snps#
+snp = c(3637,4120,6239,7103,12874,12876)#
+snp_nucl = c("3637:T/C","4120:C/T","6239:C/T","7103:T/C","12874:A/C","12876:C/A")#
+points(c(3637,4120,6239,7103,12844,12906),rep(4,5),col = c("orange","blue","green","black","purple","red"),pch = 19)#
+#
+legend(13000,y = 3.6, legend = snp_nucl, fill = c("blue","green","black","purple","red"),cex = 0.7)
+mito_depth = read.table("../../results/mito_sort.depth")#
+dev.new(width=15, height=3)#
+plot(1:15975,log(mito_depth[,3],10),type = "l", ylim = c(2,4), ylab = "coverage",yaxt = "n", xlab = "position (bp)")#
+axis(2,at = c(2,3,4),labels = c(100,1000,10000), cex.axis = 0.7)#
+#
+#add snps#
+snp = c(3637,4120,6239,7103,12874,12876)#
+snp_nucl = c("3637:T/C","4120:C/T","6239:C/T","7103:T/C","12874:A/C","12876:C/A")#
+points(c(3637,4120,6239,7103,12844,12906),rep(4,5),col = c("orange","blue","green","black","purple","red"),pch = 19)#
+#
+legend(13000,y = 3.6, legend = snp_nucl, fill = c("blue","green","black","purple","red"),cex = 0.7)
+dev.new(width=15, height=3)#
+plot(1:15975,log(mito_depth[,3],10),type = "l", ylim = c(2,4), ylab = "coverage",yaxt = "n", xlab = "position (bp)")#
+axis(2,at = c(2,3,4),labels = c(100,1000,10000), cex.axis = 0.7)#
+#
+#add snps#
+snp = c(3637,4120,6239,7103,12874,12876)#
+snp_nucl = c("3637:T/C","4120:C/T","6239:C/T","7103:T/C","12874:A/C","12876:C/A")#
+points(c(3637,4120,6239,7103,12844,12906),rep(4,6),col = c("orange","blue","green","black","purple","red"),pch = 19)#
+#
+legend(13000,y = 3.6, legend = snp_nucl, fill = c("blue","green","black","purple","red"),cex = 0.7)
+dev.new(width=15, height=3)#
+plot(1:15975,log(mito_depth[,3],10),type = "l", ylim = c(2,4), ylab = "coverage",yaxt = "n", xlab = "position (bp)")#
+axis(2,at = c(2,3,4),labels = c(100,1000,10000), cex.axis = 0.7)#
+#
+#add snps#
+snp = c(3637,4120,6239,7103,12874,12876)#
+snp_nucl = c("3637:T/C","4120:C/T","6239:C/T","7103:T/C","12874:A/C","12876:C/A")#
+points(c(3637,4120,6239,7103,12844,12906),rep(4,6),col = c("orange","blue","green","black","purple","red"),pch = 19)#
+#
+legend(13000,y = 3.6, legend = snp_nucl, fill = c("orange","blue","green","black","purple","red"),cex = 0.7)
+dev.print(device=pdf, "../../figures/Figure2.pdf", onefile=FALSE)#
+dev.off()

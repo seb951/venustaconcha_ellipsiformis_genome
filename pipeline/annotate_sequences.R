@@ -38,6 +38,7 @@ if(file.exists("assembly_k41_B24G_H4_kc3-10_rr_CDS.fa")==F) system("awk '{gsub(/
 #only keep the CDS according to the gff file...
 #if(file.exists("annotation_quast_v3/predicted_genes/assembly_k41_B24G_H4_kc3-10_glimmer_genes.gff.gz")) system("gunzip -cd annotation_quast_v3/predicted_genes/assembly_k41_B24G_H4_kc3-10_glimmer_genes.gff.gz >annotation_quast_v3/predicted_genes/assembly_k41_B24G_H4_kc3-10_glimmer_genes.gff")
 gff = read.table("annotation_quast_v3/predicted_genes/assembly_k41_B24G_H4_kc3-10_glimmer_genes2.gff",stringsAsFactors=F)
+system("rm annotation_quast_v3/predicted_genes/assembly_k41_B24G_H4_kc3-10_glimmer_genes2.gff")
 gff_temp = c(1:nrow(gff))[gff[,3] == "CDS"]
 gff_cds_only = cbind((gff_temp*2) -1,(gff_temp*2))
 gff_cds_only = as.vector(t(gff_cds_only))

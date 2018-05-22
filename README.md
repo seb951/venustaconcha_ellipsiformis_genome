@@ -1,2 +1,2 @@
 # Venustaconcha_genome
-This describes the ABySS 2.0 pipeline used to build a reference genome for Venustaconcha.
+This describes the pipeline used to build a draft genome for Venustaconcha ellipsiformis.

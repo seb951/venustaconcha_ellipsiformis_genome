@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#PBS -l walltime=23:59:00
+#PBS -l nodes=1:ppn=12
+#PBS -l mem=8gb
+#PBS -r n
+#PBS -j oe
+#PBS -A ujp-495-aa
+
+
+
+cd /RQexec/renaut/sophie_breton/genome/abyss/results/dir_k41_B24G_H4_kc3/
+
+module load blast+
+
+#blastp all ORF against trematode contaminants.
+blastp -db /RQexec/renaut/blast_database/trem_nem_bact/trem_nem_bact.fasta  -query assembly10_cds.orf \
+-evalue 1e-20 -max_target_seqs 1 -num_threads 12 -outfmt 6 >trem_nem_bact.out
+
+#keep only sequences with identity percentage above 90%.
+awk '$3>90' trem_nem_bact.out >trem_nem_bact90.out
+awk '$3>95' trem_nem_bact.out >trem_nem_bact95.out
+awk '$3>99' trem_nem_bact.out >trem_nem_bact99.out
+
+#rm
+#rm trematodata.out
