@@ -1,6 +1,6 @@
 mkdir ../../results/dir_k41_B24G_H4_kc3
 
-###
+###denovo assembly with bloom filter
 time (abyss-bloom-dbg -k41 -q3 -v -b24G -H4 -j24 --kc=3  ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R1_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.006.Index_10.H3412_9_R2_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R1_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.008.Index_10.H3412_9_R2_paired.fastq.gz > ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.fa 2>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log) 2>../../results/dir_k41_B24G_H4_kc3/abyss-bloom-dbg.time
 AdjList -v   -k41 -m25 --dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.fa >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.dot 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 abyss-filtergraph -v --dot   -k41 -g ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-2.dot1 ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.fa >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.path 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
@@ -10,6 +10,8 @@ MergeContigs -v  -k41 -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_
 awk '!/^>/ {x[">" $1]=1; next} {getline s} $1 in x {print $0 "\n" s}' \
 		../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-2.path ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-1.fa >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-indel.fa 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 ln -sf ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-unitigs.fa 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
+
+#add paired end info
 abyss-map  -j12 -l25    ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R1_paired.fastq.gz ../../../sequences/pairends/err_corrected_bfc_HI.0502.007.Index_10.H3412_9_R2_paired.fastq.gz ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa \
 		|abyss-fixmate -v  -l25  -h lib6-3.hist \
 		|sort -S1G -T /RQexec/renaut/sophie_breton/genome/abyss/tmp/dir_k41_B24G_H4_kc3/ -snk3 -k4 \
@@ -23,7 +25,7 @@ abyss-map  -j12 -l25    ../../../sequences/pairends/err_corrected_bfc_HI.0502.00
 		|sort -S1G -T /RQexec/renaut/sophie_breton/genome/abyss/tmp/dir_k41_B24G_H4_kc3/ -snk3 -k4 \
 		|DistanceEst -v  -j12 -k41 -l25 -s100 -n2 -o lib8-3.dist lib8-3.hist 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 
-###
+###corrections
 abyss-todot -v --dist -e ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa lib6-3.dist lib7-3.dist lib8-3.dist >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.dist 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 Overlap -v --dot   -k41 -g ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.dot -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.dist 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 SimpleGraph -v   -j12 -k41 -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.path1 ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.dist 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
@@ -34,7 +36,7 @@ PathOverlap --assemble -v  -k41  ../../results/dir_k41_B24G_H4_kc3/assembly_k41_
 cat ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.fa|PathConsensus -v --dot -k41  -p0.9  -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.path -s ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.fa -g ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.dot - ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.path3 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 cat ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-3.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-4.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.fa |MergeContigs -v  -k41 -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.fa - ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.path 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 
-####
+####add mate-pair info.
 PathOverlap --overlap -v  -k41 --dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-5.path >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.dot 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 ln -sf ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-contigs.dot 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 abyss-map  -j12 -l25    ../../../sequences/matepairs//err_corrected_bfc_HI.0766.0012.H3412_12_R1_paired.fastq.gz ../../../sequences/matepairs//err_corrected_bfc_HI.0766.0012.H3412_12_R2_paired.fastq.gz ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.fa \
@@ -45,7 +47,7 @@ abyss-scaffold -v   -k41 -s100-10000 -n2 -g ../../results/dir_k41_B24G_H4_kc3/as
 PathConsensus -v --dot -k41  -p0.9  -s ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.fa -g ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.dot -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.path ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.path 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 cat ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-6.fa ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.fa|MergeContigs -v  -k41 -o ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-8.fa - ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.path 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 
-###
+###ad long read + transcriptome info
 PathOverlap --overlap -v  -k41 --dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.dot ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-7.path >../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-8.dot 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
 
 /RQusagers/renaut/bwa-master/bwa index ../../results/dir_k41_B24G_H4_kc3/assembly_k41_B24G_H4_kc3-8.fa 2>>../../results/dir_k41_B24G_H4_kc3/k41_B24G_H4_kc3-1.log
