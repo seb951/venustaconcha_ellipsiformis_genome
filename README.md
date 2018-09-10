@@ -1,10 +1,10 @@
-#Sequencing files
-Raw sequences are available in the SRA database with project number PRJNA433387 (3 Illumina Paired-end libraries, 2 Illumina Mate-pair libraries, 1 PacBio long read library).
+# Sequencing files
+Raw sequencing data (3 Illumina Paired-end libraries, 2 Illumina Mate-pair libraries, 1 PacBio long read library) and sequenced genome (1 draft genome) are available from NCBI SRA under bioproject *PRJNA433387* 
 
 # Venustaconcha_genome
 This repo contains the scripts necessary to assemble and annotate the Venustaconcha ellipsiformis genome, in addition to the QUAST annotation files and some, along with some supplementary files (annotations, mitogenome analyses)
 
-#The raw sequencing data and sequenced genome is available from NCBI SRA under bioproject PRJNA433387.
+#All scripts (pipeline) used in the analyses are provided here: https://github.com/seb951/venustaconcha_ellipsiformis_genome
 
 #bfc_mp.PBS
 bfc error correction for mate-pairs
@@ -33,7 +33,6 @@ mitochondrial genome analyses
 #quast.PBS
 quast statitics
 
-#All scripts (pipeline) used in the analyses are provided here: https://github.com/seb951/venustaconcha_ellipsiformis_genome
 #annotate_sequences_broken.R
 #annotate_sequences_masked.R
 #annotate_sequences.PBS
