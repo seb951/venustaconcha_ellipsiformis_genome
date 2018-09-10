@@ -1,3 +1,6 @@
+#Sequencing files
+Raw sequences are available in the SRA database with project number PRJNA433387 (3 Illumina Paired-end libraries, 2 Illumina Mate-pair libraries, 1 PacBio long read library).
+
 # Venustaconcha_genome
 This repo contains the scripts necessary to assemble and annotate the Venustaconcha ellipsiformis genome, in addition to the QUAST annotation files and some, along with some supplementary files (annotations, mitogenome analyses)
 
