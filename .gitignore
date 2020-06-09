@@ -1,2 +1,5 @@
 pipeline/graveyard
 README.html
+.DS_Store
+pipeline/.DS_Store
+pipeline/.Rapp.history
