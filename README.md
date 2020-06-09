@@ -30,7 +30,7 @@
 * [mito_contigs_highstringency.blastout](mito_contigs_highstringency.blastout): 53 unique contigs blasting to the mt genome  
 * [mito_female_venustaconcha.fasta.gz](mito_female_venustaconcha.fasta.gz) : mito_female_venustaconcha fasta file (mt reference from Breton et al.2009, denovo mt genome, mt genome consensus from realignment)  
 * assembly_k41_B24G_H4_kc3-10.fa.gz : final assembled genome (all long scaffolds): Note that this file is actually stored on NCBI under "QKMX00000000" (with short contigs <1000bp and putative contamination removed)  
-* [names_correspondance_ncbi_original.gz](names_correspondance_ncbi_original.gz): A correspondance file betweeen the contig names as originally labelled in the analysis and the names given by NCBI. Note that in the annotation files, the contigs have names such as **81_read_HWI-ST748_169_D1ANHACXX_7_1101_19871_3720**, but in the correspondance file, this would match to **>81** part of the name.
+* [names_correspondance_ncbi_original.gz](names_correspondance_ncbi_original.gz): A correspondence file between the contig names as originally labelled in the analysis and the names given by NCBI. Note that in the annotation files, the contigs have names such as **81_read_HWI-ST748_169_D1ANHACXX_7_1101_19871_3720**, but in the correspondence file, this would match simply to **>81**.
 
 
 # QUAST annotation folder (annotation_quast_v3)
